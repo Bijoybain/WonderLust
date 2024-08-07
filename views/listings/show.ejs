@@ -1,0 +1,57 @@
+<% layout("/layouts/boilerplate") %>
+<div class="row">
+  <div class="col-8 offset-2">
+    <h1><%= listing.title %> </h1>
+  </div>
+  <div class="card col-6 offset-3 listing-card">
+    <img src="<%=listing.image.url%>" class="card-img-top show-img" alt="listimg" />
+    <div class="card-body">
+      <p class="card-text">
+        <b> <%= listing.title %> </b> <br />
+        <%= listing.description %> <br />
+        <%= listing.price.toLocaleString("en-IN")%> BDT <br />
+        <%= listing.location %>
+      </p>
+    </div>
+  </div>
+
+  <div class="col-6 offset-3 btns">
+    <a class="btn btn-dark" href="/listings/<%= listing._id %>/edit">EDIT</a>
+    <form
+      style="display: inline-block"
+      method="POST"
+      action="/listings/<%=listing._id%>?_method=DELETE"
+    >
+      <button class="btn btn-danger">Delete</button>
+    </form>
+  </div>
+
+  <div class="col-8 offset-3">
+    <h3>Leave a Review</h3>
+    <form  >
+      <div>
+        <label class="form-label" for="rating">Rating</label>
+        <input  type="range" name="review[rating]" id="rating" min="1" max="5">
+      </div>
+      <div>
+        <label class="form-label" for="comment">comments</label>
+        <textarea class="form-control" name="review[comment]" id="comment"></textarea>
+      </div>
+      <button class="btn-primary btn mt-3">submit</button>
+    </form>
+  </div> 
+  <div class="col-8 offset-3 mb-3">
+    <h3>Where you'll be</h3>
+    <div id="map"></div>
+    <script>
+	let mapToken = "<%= process.env.MAP_TOKEN %>";
+  console.log(mapToken);
+  mapboxgl.accessToken = mapToken;
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        center: [-74.5, 40], // starting position [lng, lat]. Note that lat must be set between -90 and 90
+        zoom: 9 // starting zoom
+    });
+</script>
+  </div>
+  </div>

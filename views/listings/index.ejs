@@ -1,0 +1,120 @@
+<% layout("/layouts/boilerplate") %>
+<%- success %>
+<style>
+  #filters{
+display: flex;
+flex-wrap: wrap;
+width: 100%;
+align-items: center;
+
+  }
+  .filter{
+    padding: 1rem 1.5rem;
+    text-align: center;
+    opacity: 0.7;
+  }
+  .filter:hover{
+    opacity: 1;
+  }
+.filter i{
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.float-right{
+  display: flex;
+  justify-content: space-evenly;
+  border: 1px solid rgb(70, 70, 70);
+  align-items: center;
+  border-radius: 20px;
+  height: 2.6rem;
+  width: 16rem;
+}
+.float-right input{
+  margin-right: 0.5rem;
+}
+.taxBtn{
+  display: none;
+}
+  </style>
+
+<div id="filters">
+  <div class="filter">
+    <div><i class="fa-solid fa-fire"></i></div>
+    <p>fire</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-brands fa-squarespace"></i></div>
+    <p>founding</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-umbrella"></i></div>
+    <p>rainy</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-umbrella"></i></div>
+    <p>rainy</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-umbrella"></i></div>
+    <p>rainy</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-brands fa-gripfire"></i></div>
+    <p>girpfire</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-tower-observation"></i></div>
+    <p>tower</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-fire-flame-curved"></i></div>
+    <p>flame</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-city"></i></div>
+    <p>City</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-tree"></i></div>
+    <p>Tree</p>
+  </div>
+<div class="filter">
+ 
+</div>
+ <div class="form-check form-switch form-check-reverse float-right">
+   <label class="form-check-label" for="flexSwitchCheckReverse">Display Total after tax</label>
+   <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse">
+</div>
+</div>
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-xsm-1">
+    <% for(let listing of allListings){ %>
+      <a class="listings-link" href="/listings/<%= listing._id %>">
+     <div class="card col listing-card" style="width: 20rem">
+      <img src="<%= listing.image.url %>" class="card-img-top" alt="list img" style="height:20rem"/>
+      <div class="card-img-overlay"></div>
+      <div class="card-body">
+        <p class="card-text">
+
+          <%= listing.title %> <br/>
+          <%= listing.price %> / night
+                  <i class="taxBtn">taxes +10%</i>
+        </p>
+      </div>
+    </div>
+    </a>
+    <% } %>
+</div>
+<script>
+let taxSwitch = document.getElementById("flexSwitchCheckReverse");
+taxSwitch.addEventListener("click",()=>{
+let taxBtn = document.getElementsByClassName("taxBtn");
+for(tax of taxBtn){
+  if(tax.style.display !="inline"){
+tax.style.display = "inline";
+} else{
+  tax.style.display="none";
+}
+}
+})
+</script>
